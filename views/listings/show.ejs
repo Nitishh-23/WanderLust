@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WnaderLust</title>
+</head>
+<body>
+    <h3>Listing details:</h3>
+    <ul>
+        <li>Listing Title: <b><%=item.title%></b></li>
+        <li>Listing description: <br><%=item.description%></li>
+        <li>Listing Price: ₹<b><%=item.price.toLocaleString("en-IN") %></b></li>
+        <li>Listing Location: <b><%=item.location%></b></li>
+        <li>Listing Country: <%=item.country%></li>
+    </ul>
+
+    <a href="/listings/<%=item._id%>/edit">Edit Listing</a>
+
+    <BR></BR>
+
+    <form method="post" action="/listings/<%=item._id%>?_method=DELETE">
+        <button>Delete Listing</button>
+    </form>
+</body>
+</html>
