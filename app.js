@@ -37,7 +37,7 @@ app.get("/listings/new",async(req,res)=>{
 
 app.get("/listings/:id",async(req,res)=>{
     let {id}=req.params;
-    // console.log(id);
+    //console.log(id);
     const item=await Listing.findById(id);
     res.render("listings/show.ejs",{item});
 })

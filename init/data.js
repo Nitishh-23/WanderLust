@@ -163,7 +163,7 @@ const sampleListings = [
       description:
         "Step into the glamour of the 1920s in this stylish Art Deco apartment in South Beach.",
       image:
-        "https://www.holidify.com/images/cmsuploads/compressed/352709973_20221014181714.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Mumbai_03-2016_44_Marine_Drive.jpg/250px-Mumbai_03-2016_44_Marine_Drive.jpg",
       price: 2000,
       location: "Miami",
       country: "United States",
