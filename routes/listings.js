@@ -4,6 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ServerErrors = require("../utils/ServerErrors.js");
 const {listingSchema}=require("../schema.js");
 const Listing = require("../models/listing.js");
+const {isLoggedin}=require("../middleware.js");
 
 
 //validate a listing request
@@ -26,7 +27,7 @@ router.get("/", wrapAsync(async (req, res) => {
 }))
 
 //new listing form
-router.get("/new", wrapAsync(async (req, res) => {
+router.get("/new",isLoggedin, wrapAsync(async (req, res) => {
     res.render("listings/new.ejs")
 }))
 
@@ -43,7 +44,7 @@ router.get("/:id", wrapAsync(async (req, res) => {
 }))
 
 //edit a listing form
-router.get("/:id/edit", wrapAsync(async (req, res) => {
+router.get("/:id/edit",isLoggedin, wrapAsync(async (req, res) => {
     let { id } = req.params;
     const item = await Listing.findById(id);
     if(!item){
@@ -54,7 +55,7 @@ router.get("/:id/edit", wrapAsync(async (req, res) => {
 }))
 
 //edited listing redirect
-router.put("/:id",validateListing, wrapAsync(async (req, res) => {
+router.put("/:id",isLoggedin,validateListing, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body.listing });
     req.flash("success","Successfully updated listing!");
@@ -62,7 +63,7 @@ router.put("/:id",validateListing, wrapAsync(async (req, res) => {
 }))
 
 //create a new listing
-router.post("/",validateListing, wrapAsync(async (req, res, next) => {
+router.post("/",isLoggedin,validateListing, wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     req.flash("success","Successfully added!");
@@ -71,7 +72,7 @@ router.post("/",validateListing, wrapAsync(async (req, res, next) => {
 )
 
 //delete a listing
-router.delete("/:id", wrapAsync(async (req, res) => {
+router.delete("/:id",isLoggedin, wrapAsync(async (req, res) => {
     let { id } = req.params;
     let dl = await Listing.findByIdAndDelete(id);
     console.log(dl);
