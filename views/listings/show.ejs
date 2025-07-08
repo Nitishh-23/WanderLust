@@ -9,16 +9,23 @@
             <img src="<%= item.image %>" class="card-img-top show-img" alt="listing_image">
             <div class="card-body">
                 <p class="card-text">
-                    <br>
-                    <%=item.description%> <br>
-                        ₹<b><%=item.price.toLocaleString("en-IN") %></b> <br>
-                        <%=item.location%> <br>
-                            <%=item.country%> <br>
+                <p> Owned by : <b><i>
+                            <%= item.owner.username %>
+                        </i></b></p>
+                <p>
+                   About : <%=item.description%>
+                </p>
+                <p> Price : ₹<b><%=item.price.toLocaleString("en-IN") %></b></p>
+                <p> Loacted at : <%=item.location%>
+                </p>
+                <p> Situated in: <%=item.country%>
+                </p>
                 </p>
             </div>
         </div>
     </div>
     <div class="row">
+        <% if(currUser && currUser._id.equals(item.owner._id)) {%>
         <div class="col-1 offset-3">
             <a href="/listings/<%=item._id%>/edit" class="btn btn-dark edit-btn">Edit</a>
         </div>
@@ -27,8 +34,10 @@
                 <button class="btn btn-dark">Delete</button>
             </form>
         </div>
+        <% } %>
         <div class="col-8 offset-3 mb-3">
             <hr>
+            <% if(currUser) {%>
             <h4>Add a Review</h4>
             <form action="/listings/<%= item._id %>/reviews" method="post" novalidate class="needs-validation">
                 <div class="mb-3 mt-3">
@@ -47,17 +56,23 @@
                 <button class="btn btn-outline-dark">Submit</button>
             </form>
             <hr>
+            <% } %>
             <h4>All reviews</h4>
             <div class="row">
                 <% for (rev of item.reviews){ %>
                     <div class="card col-5 ms-3 mb-3">
                         <div class="card-body">
-                            <h6 class="card-title">User</h6>
-                            <p class="card-text"><%= rev.comment %></p>
-                            <p class="card-text"><%= rev.rating %>&#11088;</p>
+                            <b class="card-title"><%= rev.author.username %></b>
+                            <p class="card-text">
+                                <%= rev.comment %>
+                            </p>
+                            <p class="card-text">
+                                <%= rev.rating %>&#11088;
+                            </p>
                         </div>
                         <br>
-                        <form action="/listings/<%=item._id%>/reviews/<%=rev._id%>?_method=DELETE" class="mb-2" method="post">
+                        <form action="/listings/<%=item._id%>/reviews/<%=rev._id%>?_method=DELETE" class="mb-2"
+                            method="post">
                             <button class="btn btn-sm btn-dark">Delete</button>
                         </form>
                     </div>
