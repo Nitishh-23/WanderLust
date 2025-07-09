@@ -3,11 +3,14 @@ const router=express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const {isLoggedin,isOwner,validateListing}=require("../middleware.js");
 const listingController=require("../controllers/listings.js");
+const multer=require("multer");
+const {storage}=require("../cloudConfig.js");
+const upload=multer({storage});
 
 //show all and create new
 router.route("/")
 .get(wrapAsync(listingController.index))
-.post(isLoggedin,validateListing, wrapAsync(listingController.createListing));
+.post(isLoggedin,upload.single("listing[image]"), validateListing,wrapAsync(listingController.createListing));
 
 //new listing form
 router.get("/new",isLoggedin, wrapAsync(listingController.renderNewForm));
@@ -15,7 +18,7 @@ router.get("/new",isLoggedin, wrapAsync(listingController.renderNewForm));
 //show one, edit and delete
 router.route("/:id")
 .get(wrapAsync(listingController.viewListing))
-.put(isLoggedin,isOwner, validateListing, wrapAsync(listingController.editListing))
+.put(isLoggedin,isOwner,upload.single("listing[image]"), validateListing, wrapAsync(listingController.editListing))
 .delete(isLoggedin,isOwner, wrapAsync(listingController.deleteListing));
 
 //edit a listing form
