@@ -36,8 +36,8 @@
         </div>
         <% } %>
         <div class="col-8 offset-3 mb-3">
-            <hr>
             <% if(currUser) {%>
+                <hr>
             <h4>Add a Review</h4>
             <form action="/listings/<%= item._id %>/reviews" method="post" novalidate class="needs-validation">
                 <div class="mb-3 mt-3">
@@ -70,8 +70,9 @@
             </form>
             <hr>
             <% } %>
-            <h4>All reviews</h4>
+            <% if(item.reviews.length >0) {%>
             <div class="row">
+                <h4>All reviews</h4>
                 <% for (rev of item.reviews){ %>
                     <div class="card col-5 ms-3 mb-3">
                         <div class="card-body">
@@ -91,5 +92,6 @@
                     </div>
                     <% } %>
             </div>
+            <% } %>
         </div>
     </div>
