@@ -1,164 +1,139 @@
-# ✈️ WanderLust
+# WanderLust 🌍
 
-Welcome to WanderLust, your ultimate travel companion! Explore hidden gems, share your experiences, and connect with fellow travelers. With secure authentication, seamless content management, and intuitive design, planning your next adventure has never been easier.
-
-Whether you’re a globe-trotting veteran or embarking on your first journey, WanderLust brings the world to your fingertips.
+**Live Site:** [https://wanderlust-6nod.onrender.com/listings](https://wanderlust-6nod.onrender.com/listings)
 
 ---
 
-## 🔧 Tech Stack
+## Overview
 
-```
-🟢 Node.js   | 🚂 Express.js   | 🍃 MongoDB
-✏️ EJS       | 🎟️ Passport.js | 🧪 Joi
-```
+<img width="1918" height="944" alt="image" src="https://github.com/user-attachments/assets/8717e2ad-88f0-4029-a4c1-0cf259b94960" />
+<img width="820" height="844" alt="image" src="https://github.com/user-attachments/assets/671c53c8-3e71-415c-8230-5aa35be66a13" />
 
-## Features (Phase 1 & 2)
 
-* **User Management**
 
-  * Registration, login, logout with secure session management
-  * Role-based authorization: only listing owners or review authors can modify their content
+**WanderLust** is a full-stack travel accommodation web application where users can explore and view various listings of stays across different locations. Built with EJS templating and the Express.js framework, the project demonstrates end-to-end functionality of a listing platform, from database modeling to frontend rendering.
 
-* **Listings CRUD**
+---
 
-  * Create, Read, Update, Delete travel destinations
-  * Rich data model: title, images, description, location, price, geometry (GeoJSON)
+## Features
 
-* **Reviews**
+🏕️ View Listings: Explore a wide range of stay listings with pricing, images, descriptions, and locations.
 
-  * Add and delete reviews on listings
-  * Cascade deletion: reviews auto-removed when parent listing is deleted
+➕ Add New Listings: Any registered user can create new listings with details like title, image, price, location, and description.
 
-* **Data Relationships**
+📝 Edit/Delete Listings: Listings are editable and removable using dynamic routes and secure forms.
 
-  * Mongoose models for `User`, `Listing`, `Review` with proper references
-  * Virtuals & middleware to maintain referential integrity
+📷 Image Uploads: Multiple image support using Cloudinary.
 
-* **Validation & Error Handling**
+🗺️ Location Tagging: Listings include a textual location field input by the user (without map integration).
 
-  * Joi schemas for request validation (`schema.js`)
-  * Async route wrapper (`utils/wrapAsync.js`) and global error handler
+🔒 Authentication System: Includes secure user registration, login, and session management with Passport.js. Visitors can sign up or log in to access protected routes.
 
-* **Authentication & Authorization**
+💬 Review System: Users can leave reviews with star ratings and comments on listings.
 
-  * Passport.js with `passport-local-mongoose`
-  * Session stored in MongoDB via `connect-mongo`
-  * Flash messages for user feedback
+🔁 AJAX Integration: The site handles AJAX API requests smoothly for review deletion and dynamic page updates.
+---
 
-* **Database & Security**
+## Technologies Used
 
-  * MongoDB with Mongoose ODM
-  * Environment-based configuration (via `.env`)
-  * Input sanitization with `express-mongo-sanitize`
-  * HTTP headers hardening with `helmet`
-  * Secure cookies (`httpOnly`, `sameSite`)
+| Layer       | Tech Stack                                      |
+| ----------- | ----------------------------------------------- |
+| Frontend    | HTML, CSS, Bootstrap, EJS (Embedded JavaScript) |
+| Backend     | Node.js, Express.js                             |
+| Database    | MongoDB, Mongoose                               |
+| Cloud/Image | Cloudinary for media uploads                    |
+| Auth        | Passport.js, express-session            |
+| Hosting     | Render (App), MongoDB Atlas (DB)                |
 
-## Tech Stack
-
-* Backend: Node.js, Express.js
-* Database: MongoDB, Mongoose
-* Authentication: Passport.js (`passport-local`)
-* Validation: Joi
-* Templating: EJS (ejs-mate)
-* Sessions: express-session, connect-mongo
-* Security: helmet, express-mongo-sanitize, xss-clean
-* Styling: CSS (Phase 2 basics)
-
-## Coding & Commit Guidelines
-
-1. **Branching**: `feature/YourFeature`, `fix/YourFix`, `docs/YourDocs`
-2. **Commits**:
-
-   * Use present tense: `Add user login flow`
-   * Reference issues where relevant: `Add geocoding (#42)`
-3. **Code Style**: Follow existing JS conventions; avoid console.logs in production; indent with 2 spaces.
-4. **Pull Requests**:
-
-   * Title: Brief description
-   * Include screenshots for UI changes
-   * Ensure all tests pass
-
-## Project Structure
-
-```
-WanderLust/
-├─ models/           # Mongoose models (User, Listing, Review)
-├─ routes/           # Express routes (listings.js, reviews.js, users.js)
-├─ utils/            # Helpers (wrapAsync, error classes)
-├─ middleware.js     # Auth & validation middleware
-├─ schema.js         # Joi validation schemas
-├─ app.js            # App entry point & config
-├─ public/css/       # Stylesheets
-├─ views/            # EJS templates
-├─ .env.example      # Environment variable template
-├─ package.json      # Dependencies & scripts
-└─ README.md         # Project overview & docs
-```
+---
 
 ## Installation & Setup
 
-1. **Clone the repo**
+### Prerequisites
 
-   ```bash
-   git clone https://github.com/Nitishh-23/WanderLust.git
-   cd WanderLust
-   ```
-2. **Install dependencies**
+* Node.js (v20 or above)
+* MongoDB Atlas account
+* Cloudinary  API credentials
 
-   ```bash
-   npm install
-   ```
-3. **Environment Variables**
+### Environment Variables
 
-   * Copy `.env.example` to `.env`
-   * Configure:
+Create a `.env` file in the root directory with the following:
 
-     ```env
-     DB_URL=mongodb://localhost:27017/wanderlust
-     SECRET=yourSessionSecret
-     ```
-4. **Run the App**
+```env
+DB_URL=your_mongodb_atlas_connection_string
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_KEY=your_cloudinary_api_key
+CLOUDINARY_SECRET=your_cloudinary_api_secret
+MAPBOX_TOKEN=your_mapbox_access_token
+SECRET=your_cookie_secret
+```
 
-   ```bash
-   npm run dev
-   ```
-5. **Access**
-   [http://localhost:3000](http://localhost:3000)
+### Steps to Run Locally
 
-## Phase 3 Roadmap
+1. **Clone the Repository**
 
-* Deployment
+```bash
+git clone https://github.com/Nitishh-23/WanderLust.git
+cd WanderLust
+```
 
-  * Docker & Docker Compose
-  * CI/CD with GitHub Actions
-* Maps & Geocoding
+2. **Install Dependencies**
 
-  * Integrate Mapbox for interactive maps
-  * Auto-geocode addresses into GeoJSON
-* Enhanced UI/UX
+```bash
+npm install
+```
 
-  * Migrate to Tailwind CSS
-  * Responsive, mobile-first design
-  * Client-side form validation
-* Additional Features
+3. **Start the Server**
 
-  * Search, filter, & pagination
-  * Image uploads via Cloudinary
-  * User profiles & avatars
+```bash
+npm start
+```
 
-## Contributing
+5. **Visit the App** Open your browser and go to:
 
-1. Fork the project
-2. Branch: `git checkout -b feature/YourFeature`
-3. Commit: `git commit -m "Add your feature"`
-4. Push: `git push origin feature/YourFeature`
-5. Open a Pull Request
-
-## License
-
-MIT License
+```
+http://localhost:8080/listings
+```
 
 ---
 
-*Phase 3 in progress — deployment, maps, and UI enhancements coming soon!*
+## Folder Structure
+
+```bash
+WanderLust/
+├── models/            # Mongoose schema definitions
+├── public/            # Static files (Bootstrap, client-side JS, images)
+├── routes/            # Modular route definitions for listings, users, reviews
+├── controllers/       # Logic for handling routes and middleware
+├── middleware/        # Custom middleware (authentication, validation, etc.)
+├── utils/             # Utility functions (e.g. ExpressError, catchAsync)
+├── views/             # EJS templates for rendering pages
+├── node_modules/      # Project dependencies
+├── app.js             # Entry point for Express application
+├── package.json       # Project metadata and dependencies
+├── cloudinary/        # Cloudinary config and upload setup
+├── public/scripts/    # Custom frontend JavaScript
+├── public/styles/     # Custom CSS and Bootstrap overrides
+└── .env               # Environment config (not tracked)
+```
+
+---
+
+#🔍 Filter icons and search bar are currently for display only and open for contributions
+
+---
+
+## License
+
+Licensed under the **MIT License**.
+
+---
+
+## Author
+
+**Nitish Agrawal**
+[GitHub](https://github.com/Nitishh-23) 
+
+---
+
+✨ *Happy exploring with WanderLust!* ✨
